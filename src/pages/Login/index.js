@@ -9,15 +9,18 @@ import {
   InputLabel,
   InputAdornment 
 } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
+import { useContext } from 'react';
 import { UsuarioContext } from 'common/context/Usuario';
+import { useNavigate } from 'react-router';
+
+
 
 function Login() {
-  const history = useHistory();
+
+  const history = useNavigate();
+  const {nome, setNome, setSaldo , saldo} = useContext(UsuarioContext)
   return (
     <Container>
-      <UsuarioContext.Consumer>
-        {({ nome, setNome, saldo, setSaldo }) => (
           <>
             <Titulo>
               Insira o seu nome
@@ -50,13 +53,12 @@ function Login() {
             <Button
               variant="contained"
               color="primary"
-              onClick={() => history.push("/feira")}
+              onClick={() => history("/feira")}
             >
               Avançar
             </Button>
           </>
-        )}
-      </UsuarioContext.Consumer>
+        
     </Container>
   )
 };
